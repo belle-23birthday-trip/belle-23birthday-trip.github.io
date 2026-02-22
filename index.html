@@ -2,7 +2,7 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kevin & Belle 專屬：富國島之旅 🌴</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -35,23 +35,16 @@
             overflow: hidden;
         }
 
+        .calc-btn { position: absolute; top: 25px; right: 25px; background: white; border: 2px solid var(--primary-light); font-size: 1.6rem; border-radius: 50%; width: 55px; height: 55px; box-shadow: 0 4px 15px rgba(255, 142, 142, 0.3); cursor: pointer; z-index: 20; transition: transform 0.2s, box-shadow 0.2s; display: flex; justify-content: center; align-items: center; }
+        .calc-btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(255, 142, 142, 0.5); }
+        .calc-btn:active { transform: scale(0.95); }
+
         .landing-title { font-size: 2rem; color: var(--primary-color); font-weight: 900; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(255, 142, 142, 0.2); }
         .couple-name { font-size: 1.8rem; color: #D81B60; font-weight: bold; margin: 15px 0; letter-spacing: 2px; }
         .travel-dates { font-size: 1.1rem; color: #666; font-weight: 500; margin-bottom: 30px; background: white; padding: 5px 15px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         
-        /* 倒數計時器 (Landing Page 用) */
-        .countdown-container {
-            background: rgba(255, 255, 255, 0.8);
-            width: 100%;
-            max-width: 350px;
-            border-radius: 20px;
-            padding: 20px 15px;
-            box-shadow: 0 8px 25px rgba(255, 142, 142, 0.2);
-            backdrop-filter: blur(5px);
-            border: 2px solid white;
-            margin-bottom: 40px;
-            z-index: 10;
-        }
+        /* 倒數計時器 */
+        .countdown-container { background: rgba(255, 255, 255, 0.8); width: 100%; max-width: 350px; border-radius: 20px; padding: 20px 15px; box-shadow: 0 8px 25px rgba(255, 142, 142, 0.2); backdrop-filter: blur(5px); border: 2px solid white; margin-bottom: 40px; z-index: 10; }
         .countdown-title { font-size: 0.95rem; color: var(--primary-color); font-weight: bold; margin-bottom: 12px; }
         .countdown-timer { display: flex; justify-content: center; gap: 10px; }
         .time-box { background: var(--primary-light); color: #D81B60; padding: 8px 10px; border-radius: 12px; min-width: 60px; }
@@ -59,30 +52,11 @@
         .time-box small { font-size: 0.75rem; font-weight: bold; }
 
         /* 出發按鈕 */
-        .start-btn {
-            background: linear-gradient(45deg, var(--primary-color), #FF6B6B);
-            color: white;
-            border: none;
-            padding: 16px 50px;
-            font-size: 1.4rem;
-            border-radius: 40px;
-            font-weight: 900;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-            animation: pulse 2s infinite;
-            transition: transform 0.2s;
-            z-index: 10;
-        }
+        .start-btn { background: linear-gradient(45deg, var(--primary-color), #FF6B6B); color: white; border: none; padding: 16px 50px; font-size: 1.4rem; border-radius: 40px; font-weight: 900; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4); animation: pulse 2s infinite; transition: transform 0.2s; z-index: 10; }
         .start-btn:active { transform: scale(0.95); }
         .prepared-by { font-size: 0.85rem; color: #999; margin-top: 40px; font-weight: 500; }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 142, 142, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 142, 142, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 142, 142, 0); }
-        }
-
-        /* 背景裝飾 */
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 142, 142, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 142, 142, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 142, 142, 0); } }
         .decor { position: absolute; opacity: 0.1; z-index: 1; font-size: 100px; }
         .decor-1 { top: -20px; left: -20px; transform: rotate(-15deg); }
         .decor-2 { bottom: 50px; right: -20px; transform: rotate(15deg); }
@@ -90,34 +64,20 @@
         /* =========================================
            主行程頁面 (Main Itinerary) 樣式
            ========================================= */
-        #main-itinerary { display: none; padding-bottom: 50px; animation: fadeIn 0.8s ease-in-out; }
-
+        #main-itinerary { display: none; padding-bottom: 30px; animation: fadeIn 0.8s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 內頁 Header */
-        header {
-            background: linear-gradient(135deg, #FFB6C1, var(--primary-color));
-            color: white;
-            padding: 30px 20px 25px;
-            text-align: center;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            box-shadow: 0 4px 15px rgba(255, 142, 142, 0.3);
-        }
+        header { background: linear-gradient(135deg, #FFB6C1, var(--primary-color)); color: white; padding: 30px 20px 25px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 15px rgba(255, 142, 142, 0.3); }
         header h1 { font-size: 1.5rem; margin-bottom: 5px; font-weight: 700; }
         header p { font-size: 0.9rem; opacity: 0.95; }
 
-        /* 分頁選單 (Tabs) */
         .tabs { display: flex; justify-content: center; gap: 8px; margin: 25px auto; padding: 0 15px; max-width: 500px; }
         .tab-btn { background: white; border: 2px solid var(--primary-light); color: var(--primary-color); padding: 10px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; flex: 1; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .tab-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); transform: scale(1.05); }
 
-        /* 內容區塊 */
         .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
         .day-content { display: none; animation: fadeIn 0.4s ease-in-out; }
         .day-content.active { display: block; }
-
-        /* 卡片設計 */
         .day-card { background: var(--card-bg); border-radius: 25px; overflow: hidden; box-shadow: 0 8px 20px rgba(255, 142, 142, 0.15); margin-bottom: 25px; }
         .hero-img { width: 100%; height: 180px; object-fit: cover; }
         .card-body { padding: 25px; }
@@ -125,7 +85,6 @@
         .day-title { font-size: 1.3rem; font-weight: 700; color: var(--primary-color); display: block; }
         .day-subtitle { font-size: 0.85rem; color: #888; margin-top: 5px; display: block; }
 
-        /* 行程時間軸 */
         .timeline-item { display: flex; margin-bottom: 20px; position: relative; }
         .time { min-width: 65px; font-size: 0.85rem; color: var(--primary-color); font-weight: 700; padding-top: 2px; }
         .content { padding-left: 15px; border-left: 3px solid var(--primary-light); flex: 1; }
@@ -134,32 +93,64 @@
         .highlight .content { border-left-color: var(--accent-color); }
         .highlight .content strong { color: #E65100; }
 
-        /* 備忘錄 Box & Google Maps Links */
         .info-box { background-color: #FFF9FA; border-radius: 15px; padding: 15px; margin-top: 25px; border: 1px solid var(--primary-light); font-size: 0.85rem; }
         .info-box h4 { color: var(--primary-color); margin-bottom: 10px; font-size: 0.95rem; }
         .info-box ul { list-style: none; padding: 0; }
         .info-box li { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; color: #555; }
         
-        /* 超連結樣式 */
-        .map-link {
-            color: #D81B60; /* 深粉紅色 */
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            transition: color 0.2s;
-        }
+        /* 浮動計算機按鈕 (主行程用) */
+        .fab-calc { position: fixed; bottom: 25px; right: 25px; background: var(--primary-color); color: white; border: none; font-size: 1.5rem; border-radius: 50%; width: 55px; height: 55px; box-shadow: 0 4px 15px rgba(255, 142, 142, 0.5); cursor: pointer; z-index: 100; transition: transform 0.2s; display: none; justify-content: center; align-items: center; }
+        .fab-calc:hover { transform: scale(1.1); }
+        .fab-calc:active { transform: scale(0.95); }
+
+        .map-link { color: #D81B60; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s; }
         .map-link:hover { color: var(--primary-color); text-decoration: underline; }
 
-        footer { text-align: center; font-size: 0.8rem; color: #bbb; margin-top: 30px; padding-bottom: 20px; }
+        footer { text-align: center; font-size: 0.85rem; color: #aaa; margin-top: 30px; padding-bottom: 30px; }
+        
+        /* 隱藏彩蛋心心特效 (加入 touch-action 防止手機連點放大) */
+        #secret-heart { cursor: pointer; display: inline-block; transition: transform 0.2s; user-select: none; touch-action: manipulation; }
+
+        /* =========================================
+           彈出視窗 (Modals) 樣式
+           ========================================= */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(4px); animation: fadeIn 0.3s; padding: 20px; }
+        .modal-content { background: white; padding: 30px 25px; border-radius: 25px; width: 100%; max-width: 360px; text-align: center; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: #bbb; cursor: pointer; border: none; background: transparent; transition: color 0.2s; }
+        .close-modal:hover { color: var(--primary-color); }
+
+        /* 計算機專屬 */
+        .currency-input { width: 100%; padding: 15px; margin: 15px 0; border: 2px solid var(--primary-light); border-radius: 15px; font-size: 1.4rem; text-align: center; color: var(--text-color); font-weight: bold; }
+        .currency-input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 10px rgba(255, 142, 142, 0.2); }
+        .exchange-rate { font-size: 0.85rem; color: #888; margin-top: 10px; font-weight: 500; background: #f9f9f9; padding: 8px; border-radius: 10px; }
+
+        /* 密碼鎖專屬 */
+        .pwd-input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid var(--primary-light); border-radius: 15px; font-size: 1.2rem; text-align: center; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
+        .pwd-input:focus { outline: none; border-color: var(--primary-color); }
+        .error-msg { color: #D81B60; font-size: 0.85rem; font-weight: bold; display: none; margin-bottom: 15px; }
+        .submit-btn { background: linear-gradient(45deg, var(--primary-color), #FF6B6B); color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(255, 142, 142, 0.3); width: 100%; margin-top: 10px; }
+        
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
     </style>
 </head>
 <body>
 
+<!-- =========================================
+     首頁驚喜 (Landing Page)
+     ========================================= -->
 <div id="landing-page">
     <div class="decor decor-1">🌴</div>
     <div class="decor decor-2">✈️</div>
+
+    <!-- 越南盾計算機按鈕 -->
+    <button class="calc-btn" onclick="openCalcModal()">🧮</button>
 
     <h1 class="landing-title">富國島慶生之旅 🎂</h1>
     <div class="couple-name">Kevin 😘 Belle</div>
@@ -175,17 +166,25 @@
         </div>
     </div>
 
-    <button class="start-btn" onclick="startJourney()">出發🎀</button>
+    <!-- 出發按鈕 (改為彈出密碼鎖) -->
+    <button class="start-btn" onclick="openPasswordModal()">出發🎀</button>
 
     <div class="prepared-by">Prepared by 老公仔 Kevin ❤️</div>
 </div>
 
+<!-- =========================================
+     主行程頁面 (隱藏，撳掣後顯示)
+     ========================================= -->
 <div id="main-itinerary">
+    <!-- 右下角浮動計算機 -->
+    <button class="fab-calc" onclick="openCalcModal()" id="fabCalc">🧮</button>
+
     <header>
         <h1>Kevin & Belle 的富國島之旅 🌴</h1>
         <p>Happy Birthday to My Lovely Wife 🎂</p>
     </header>
 
+    <!-- 分頁選單 -->
     <nav class="tabs">
         <button class="tab-btn active" onclick="showDay(1)">Day 1</button>
         <button class="tab-btn" onclick="showDay(2)">Day 2</button>
@@ -194,6 +193,7 @@
     </nav>
 
     <div class="container">
+        <!-- Day 1 Content -->
         <div id="day1" class="day-content active">
             <div class="day-card">
                 <img src="https://images.unsplash.com/photo-1540202404-b7111422eef5?auto=format&fit=crop&w=800&q=80" alt="Phu Quoc Beach" class="hero-img">
@@ -201,6 +201,7 @@
                     <div class="day-header">
                         <span class="day-title">🛫 Day 1：啟程與南部美食</span>
                         <span class="day-subtitle">Feb 28 (Fri) | 準備好心情出發！</span>
+                        <span style="display:block; margin-top:8px; font-size:0.85rem; color:#D81B60; font-style:italic;">「帶住靚靚心情，同老公仔一齊飛！✈️」</span>
                     </div>
                     <div class="timeline-item">
                         <div class="time">07:00</div>
@@ -224,7 +225,7 @@
                     </div>
                     <div class="timeline-item">
                         <div class="time">19:30</div>
-                        <div class="content"><strong>出發陽東市區 🚕</strong><span>先去 Chemistry Bar 飲杯 Cocktail 🥂</span></div>
+                        <div class="content"><strong>出發陽東市區 🚕</strong><span>叫 Grab 出發準備食海鮮！</span></div>
                     </div>
                     <div class="timeline-item highlight">
                         <div class="time">20:15</div>
@@ -235,11 +236,10 @@
                         <div class="content"><strong>掃街買手信 🥥</strong><span>Kingkong Mart + 陽東夜市</span></div>
                     </div>
                     <div class="info-box">
-                        <h4>🕒 營業時間 & Map 捷徑 (撳字開地圖)</h4>
+                        <h4>🕒 營業時間 & Map 捷徑</h4>
                         <ul>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Intervals+Bar+Hong+Kong+Airport" target="_blank" class="map-link">📍 Intervals Bar (HKG)</a><span>07:00 - 23:30</span></li>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=French+%26+Co+JW+Marriott+Phu+Quoc" target="_blank" class="map-link">📍 French & Co</a><span>08:00 - 21:00</span></li>
-                            <li><a href="https://www.google.com/maps/search/?api=1&query=Department+of+Chemistry+Bar+JW+Marriott+Phu+Quoc" target="_blank" class="map-link">📍 Chemistry Bar</a><span>16:00 - 23:30</span></li>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Rak+Rock+Lobster+Phu+Quoc" target="_blank" class="map-link">📍 Rak Rock Lobster</a><span>10:00 - 22:00</span></li>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Kingkong+Mart+Phu+Quoc" target="_blank" class="map-link">📍 Kingkong Mart</a><span>08:00 - 22:30</span></li>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Phu+Quoc+Night+Market" target="_blank" class="map-link">📍 陽東夜市</a><span>17:00 - 23:30</span></li>
@@ -249,6 +249,7 @@
             </div>
         </div>
 
+        <!-- Day 2 Content -->
         <div id="day2" class="day-content">
             <div class="day-card">
                 <img src="https://images.unsplash.com/photo-1582653291997-079a1c04e5d1?auto=format&fit=crop&w=800&q=80" alt="Resort Pool" class="hero-img">
@@ -256,6 +257,7 @@
                     <div class="day-header">
                         <span class="day-title">🚠 Day 2：水上樂園與頂級 Villa</span>
                         <span class="day-subtitle">Mar 01 (Sat) | 陽光、玩水、食好西</span>
+                        <span style="display:block; margin-top:8px; font-size:0.85rem; color:#D81B60; font-style:italic;">「陽光、沙灘、仲有最愛嘅妳。🏖️」</span>
                     </div>
                     <div class="timeline-item highlight">
                         <div class="time">09:30</div>
@@ -282,10 +284,11 @@
                         <div class="content"><strong>晚餐：Jo's Cucina 🍝</strong><span>浪漫高質意大利菜</span></div>
                     </div>
                     <div class="info-box">
-                        <h4>🕒 營業時間 & Map 捷徑 (撳字開地圖)</h4>
+                        <h4>🕒 營業時間 & Map 捷徑</h4>
                         <ul>
-                            <li><a href="https://www.google.com/maps/search/?api=1&query=Sun+World+Hon+Thom+Nature+Park+Cable+Car+Station" target="_blank" class="map-link">📍 Sun World 跨海纜車</a><span>09:30 - 11:30; 13:30 - 17:00</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Sun+World+Hon+Thom+Nature+Park+Cable+Car+Station" target="_blank" class="map-link">📍 Sun World 跨海纜車</a><span style="font-size: 0.75rem; text-align: right; line-height: 1.2;">09:00 - 11:30<br>13:30 - 17:00</span></li>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Aquatopia+Water+Park+Phu+Quoc" target="_blank" class="map-link">📍 水上樂園 (Aquatopia)</a><span>10:00 - 16:30</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Swing+Bar+Phu+Quoc" target="_blank" class="map-link">📍 Swing Bar</a><span>16:00 - 23:30</span></li>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Jo's+Cucina+Phu+Quoc" target="_blank" class="map-link">📍 Jo's Cucina</a><span>16:00 - 22:00</span></li>
                         </ul>
                     </div>
@@ -293,6 +296,7 @@
             </div>
         </div>
 
+        <!-- Day 3 Content -->
         <div id="day3" class="day-content">
             <div class="day-card" style="border: 2px solid var(--primary-color);">
                 <img src="https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?auto=format&fit=crop&w=800&q=80" alt="Fireworks" class="hero-img">
@@ -300,6 +304,7 @@
                     <div class="day-header">
                         <span class="day-title">👑 Day 3：老婆大壽正日</span>
                         <span class="day-subtitle">Mar 02 (Sun) | Happy Birthday! 🎉</span>
+                        <span style="display:block; margin-top:8px; font-size:0.85rem; color:#D81B60; font-style:italic;">「Happy Birthday my queen! 願妳日日都咁開心。👑」</span>
                     </div>
                     <div class="timeline-item">
                         <div class="time">Morning</div>
@@ -318,10 +323,10 @@
                         <div class="content"><strong>Kiss of the Sea 大匯演 🎆</strong><span>超浪漫震撼煙花結尾 (20:30 入場)</span></div>
                     </div>
                     <div class="info-box">
-                        <h4>🕒 營業時間 & Map 捷徑 (撳字開地圖)</h4>
+                        <h4>🕒 營業時間 & Map 捷徑</h4>
                         <ul>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Sunset+Town+Phu+Quoc" target="_blank" class="map-link">📍 日落小鎮 (Sunset Town)</a><span>全日開放</span></li>
-                            <li><a href="https://maps.app.goo.gl/snAPWmXxbszdCjmc7" target="_blank" class="map-link">📍 VuiFest Bazaar 海濱夜市</a><span>16:00 - 24:00</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=VuiFest+Bazaar+Phu+Quoc" target="_blank" class="map-link">📍 VuiFest Bazaar 海濱夜市</a><span>16:00 - 24:00</span></li>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=RuNam+Phu+Quoc+Sunset+Town" target="_blank" class="map-link">📍 RuNam 餐廳</a><span>07:00 - 22:00</span></li>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Kiss+of+the+Sea+Show+Phu+Quoc" target="_blank" class="map-link">📍 Kiss of the Sea 大匯演</a><span>21:00 開騷</span></li>
                         </ul>
@@ -330,6 +335,7 @@
             </div>
         </div>
 
+        <!-- Day 4 Content -->
         <div id="day4" class="day-content">
             <div class="day-card">
                 <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Spa Massage" class="hero-img">
@@ -337,6 +343,7 @@
                     <div class="day-header">
                         <span class="day-title">💆‍♀️ Day 4：貴婦 Spa 與回程</span>
                         <span class="day-subtitle">Mar 03 (Mon) | 充充電，準備回家</span>
+                        <span style="display:block; margin-top:8px; font-size:0.85rem; color:#D81B60; font-style:italic;">「差足電，帶住滿滿愛意返香港。🔋」</span>
                     </div>
                     <div class="timeline-item">
                         <div class="time">12:00</div>
@@ -347,11 +354,11 @@
                         <div class="content"><strong>酒店 Farewell Lunch 🍽️</strong><span>對住海景食好西</span></div>
                     </div>
                     <div class="timeline-item highlight">
-                        <div class="time">14:15</div>
-                        <div class="content"><strong>Plumeria Spa 💆‍♀️💆‍♂️</strong><span>雙人按摩 (約 2 小時)，洗走疲勞！</span></div>
+                        <div class="time">13:30</div>
+                        <div class="content"><strong>Plumeria Spa 💆‍♀️💆‍♂️</strong><span>雙人按摩 (13:30 - 15:30)，洗走疲勞！</span></div>
                     </div>
                     <div class="timeline-item">
-                        <div class="time">16:30</div>
+                        <div class="time">16:00</div>
                         <div class="content"><strong>出發去機場 🚕</strong><span>由 Premier Village 出發</span></div>
                     </div>
                     <div class="timeline-item highlight">
@@ -359,7 +366,7 @@
                         <div class="content"><strong>PQC > HKG ✈️</strong><span>滿載開心回憶返香港 🏠 (23:05到達)</span></div>
                     </div>
                     <div class="info-box">
-                        <h4>🕒 營業時間 & Map 捷徑 (撳字開地圖)</h4>
+                        <h4>🕒 營業時間 & Map 捷徑</h4>
                         <ul>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Plumeria+Spa+Premier+Village+Phu+Quoc" target="_blank" class="map-link">📍 Plumeria Spa</a><span>10:00 - 20:00</span></li>
                             <li><a href="https://www.google.com/maps/search/?api=1&query=Phu+Quoc+International+Airport" target="_blank" class="map-link">📍 富國島機場 (PQC)</a><span>準備登機</span></li>
@@ -368,58 +375,181 @@
                 </div>
             </div>
         </div>
-
     </div>
 
+    <!-- 頁底 Footer & 彩蛋開關 -->
     <footer>
-        <p>Created with ❤️ for 老婆喵</p>
+        <p>Created with <span id="secret-heart">❤️</span> for 老婆喵</p>
         <p>Phu Quoc Birthday Trip 2026</p>
+        <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.5;">(Try clicking the heart 3 times... 😉)</p>
     </footer>
 </div>
 
-<script>
-    // 進入行程按鈕功能
-    function startJourney() {
-        // 隱藏第一頁，顯示行程頁面
-        document.getElementById('landing-page').style.display = 'none';
-        document.getElementById('main-itinerary').style.display = 'block';
+<!-- =========================================
+     [新增] 解鎖行程密碼 Modal 🔒
+     ========================================= -->
+<div id="password-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closePasswordModal()">✖</button>
+        <h2 style="color: var(--primary-color); margin-bottom: 5px;">🔒 驚喜解鎖</h2>
+        <p style="font-size: 0.85rem; color: #777; margin-bottom: 15px;">行程準備好啦！請輸入老公仔專屬密碼解鎖</p>
         
-        // 確保畫面回到最頂
-        window.scrollTo(0, 0);
+        <input type="text" id="pwd-input" class="pwd-input" placeholder="請輸入密碼...">
+        <div id="pwd-error" class="error-msg">❌ 密碼唔啱喎，再去嗲下老公仔啦😝</div>
+        
+        <button class="submit-btn" onclick="checkPassword()">解鎖行程 🔓</button>
+    </div>
+</div>
+
+<!-- =========================================
+     越南盾計算機 Modal 🧮
+     ========================================= -->
+<div id="calc-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeCalcModal()">✖</button>
+        <h3 style="color: var(--primary-color); margin-bottom: 5px;">🇻🇳 越南盾計算機</h3>
+        <p style="font-size: 0.85rem; color: #777; margin-bottom: 20px;">唔使估估吓，入個銀碼即刻轉港幣！</p>
+        
+        <input type="number" id="vnd-input" class="currency-input" placeholder="輸入越南盾 (VND)" oninput="convertCurrency()">
+        <div style="font-size: 1.8rem; margin: 5px 0; color: #bbb;">⬇️</div>
+        <div id="hkd-result" style="font-size: 2.2rem; font-weight: 900; color: #D81B60;">0 HKD</div>
+        <div class="exchange-rate">💡 參考匯率：1 HKD ≈ 3,300 VND</div>
+    </div>
+</div>
+
+<!-- =========================================
+     隱藏彩蛋 Modal 🎉
+     ========================================= -->
+<div id="easter-egg-modal" class="modal-overlay">
+    <div class="modal-content" style="background: linear-gradient(135deg, #FFF0F5, #FFE4E1); border: 3px solid var(--primary-color);">
+        <button class="close-modal" onclick="closeEggModal()">✖</button>
+        <h2 style="color: #D81B60; margin-bottom: 15px; font-weight: 900;">🎉 Surprise! 🎉</h2>
+        <!-- 💡你可以將下面張圖片 Link 換成你哋嘅甜蜜合照！ -->
+        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=400&q=80" alt="Love" style="width:100%; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <p style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color);">老婆喵，23歲生日快樂！🎂</p>
+        <p style="font-size: 0.95rem; color: #555; margin-top: 10px; line-height: 1.5;">多謝妳一直陪住我，未來嘅日子都要開開心心，帶妳去更多地方旅行！愛妳喲😘</p>
+        <p style="font-size: 0.9rem; color: #D81B60; margin-top: 20px; font-weight: bold;">- 最愛妳嘅 Kevin 老公仔 -</p>
+    </div>
+</div>
+
+<!-- =========================================
+     JavaScript 邏輯功能
+     ========================================= -->
+<script>
+    /* 🌟 設定出發目標時間 (全域變數) */
+    const countDownDate = new Date("Feb 28, 2026 07:00:00").getTime();
+
+    /* 1. 密碼鎖功能 */
+    function openPasswordModal() {
+        const now = new Date().getTime();
+        
+        // 如果已經夠鐘出發，直接自動解鎖，唔使再入密碼！
+        if (now >= countDownDate) {
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('main-itinerary').style.display = 'block';
+            document.getElementById('fabCalc').style.display = 'flex'; // 顯示浮動計算機
+            window.scrollTo(0, 0);
+            return;
+        }
+
+        document.getElementById('password-modal').style.display = 'flex';
+        document.getElementById('pwd-input').value = '';
+        document.getElementById('pwd-error').style.display = 'none';
+        // Auto focus for convenience
+        setTimeout(() => document.getElementById('pwd-input').focus(), 100);
     }
 
-    // Tab 切換功能
+    // 加入 Enter 鍵觸發解鎖功能
+    document.getElementById('pwd-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    });
+
+    function closePasswordModal() {
+        document.getElementById('password-modal').style.display = 'none';
+    }
+    function checkPassword() {
+        const input = document.getElementById('pwd-input');
+        const pwd = input.value.trim().toUpperCase();
+        const errorMsg = document.getElementById('pwd-error');
+        
+        if (pwd === 'ILOVEYOU') {
+            closePasswordModal();
+            // 密碼正確，隱藏首頁，顯示行程
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('main-itinerary').style.display = 'block';
+            document.getElementById('fabCalc').style.display = 'flex'; // 顯示浮動計算機
+            window.scrollTo(0, 0);
+        } else {
+            // 密碼錯誤，震動效果加錯誤提示
+            errorMsg.style.display = 'block';
+            input.style.animation = 'shake 0.4s';
+            setTimeout(() => input.style.animation = '', 400);
+        }
+    }
+
+    /* 2. Tab 切換功能 */
     function showDay(dayNumber) {
         document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-        
         document.getElementById('day' + dayNumber).classList.add('active');
         document.querySelectorAll('.tab-btn')[dayNumber-1].classList.add('active');
     }
 
-    // 倒數計時器功能 (目標：2026年2月28日 早上 07:00)
-    const countDownDate = new Date("Feb 28, 2026 07:00:00").getTime();
-
+    /* 3. 倒數計時器功能 */
     const x = setInterval(function() {
         const now = new Date().getTime();
         const distance = countDownDate - now;
-
+        
         if (distance < 0) {
             clearInterval(x);
             document.getElementById("countdown").innerHTML = "<h2 style='color:#D81B60;'>🎉 我哋出發啦！✈️</h2>";
+            document.querySelector('.start-btn').innerText = '行程解鎖 🔓'; // 夠鐘自動變字
             return;
         }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerHTML = days < 10 ? '0'+days : days;
-        document.getElementById("hours").innerHTML = hours < 10 ? '0'+hours : hours;
-        document.getElementById("mins").innerHTML = minutes < 10 ? '0'+minutes : minutes;
-        document.getElementById("secs").innerHTML = seconds < 10 ? '0'+seconds : seconds;
+        
+        document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+        document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+        document.getElementById("mins").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        document.getElementById("secs").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
     }, 1000);
+
+    /* 4. 越南盾計算機功能 */
+    function openCalcModal() { document.getElementById('calc-modal').style.display = 'flex'; }
+    function closeCalcModal() { document.getElementById('calc-modal').style.display = 'none'; }
+    function convertCurrency() {
+        const vnd = document.getElementById('vnd-input').value;
+        if (vnd) {
+            const hkd = (vnd / 3300).toFixed(1); 
+            document.getElementById('hkd-result').innerText = hkd + ' HKD';
+        } else {
+            document.getElementById('hkd-result').innerText = '0 HKD';
+        }
+    }
+
+    /* 5. 隱藏彩蛋功能 (連撳 3 下心心) */
+    let heartClicks = 0;
+    let heartTimer;
+    document.getElementById('secret-heart').addEventListener('click', function(e) {
+        e.preventDefault(); // 防止手機預設行為
+        heartClicks++;
+        
+        // 放大縮細特效
+        this.style.transform = `scale(${1 + heartClicks * 0.2})`;
+        setTimeout(() => this.style.transform = 'scale(1)', 150);
+        
+        clearTimeout(heartTimer);
+        
+        if (heartClicks >= 3) {
+            document.getElementById('easter-egg-modal').style.display = 'flex';
+            heartClicks = 0; // 重置
+        } else {
+            // 如果 1 秒內無再撳，重置次數
+            heartTimer = setTimeout(() => { heartClicks = 0; }, 1000);
+        }
+    });
+    function closeEggModal() { document.getElementById('easter-egg-modal').style.display = 'none'; }
 </script>
 
 </body>
