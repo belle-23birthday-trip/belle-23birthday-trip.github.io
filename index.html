@@ -550,7 +550,7 @@
     function convertCurrency() {
         const vnd = document.getElementById('vnd-input').value;
         if (vnd) {
-            const hkd = (vnd / 3300).toFixed(1); 
+            const hkd = (vnd / 3.3).toFixed(1); 
             document.getElementById('hkd-result').innerText = hkd + ' HKD';
         } else {
             document.getElementById('hkd-result').innerText = '0 HKD';
@@ -583,6 +583,7 @@
 
 </body>
 </html>
+
 
 
 
