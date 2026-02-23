@@ -154,6 +154,8 @@
         }
 
     </style>
+<!-- 🎊 引入撒花特效 Library 🎊 -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
@@ -461,10 +463,7 @@
         
         // 如果已經夠鐘出發，直接自動解鎖，唔使再入密碼！
         if (now >= countDownDate) {
-            document.getElementById('landing-page').style.display = 'none';
-            document.getElementById('main-itinerary').style.display = 'block';
-            document.getElementById('fabCalc').style.display = 'flex'; // 顯示浮動計算機
-            window.scrollTo(0, 0);
+           triggerUnlock();
             return;
         }
 
@@ -493,16 +492,30 @@
         if (pwd === 'ILOVEYOU') {
             closePasswordModal();
             // 密碼正確，隱藏首頁，顯示行程
-            document.getElementById('landing-page').style.display = 'none';
-            document.getElementById('main-itinerary').style.display = 'block';
-            document.getElementById('fabCalc').style.display = 'flex'; // 顯示浮動計算機
-            window.scrollTo(0, 0);
+            triggerUnlock();
         } else {
             // 密碼錯誤，震動效果加錯誤提示
             errorMsg.style.display = 'block';
             input.style.animation = 'shake 0.4s';
             setTimeout(() => input.style.animation = '', 400);
         }
+        // 解鎖後執行的特效及畫面切換
+    function triggerUnlock() {
+        // 🎊 撒花特效 🎊 (配色設定為主題色粉紅、藍、橙)
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#FF8E8E', '#6EB5FF', '#FFB347', '#D81B60']
+            });
+        }
+        // 切換頁面
+        document.getElementById('landing-page').style.display = 'none';
+        document.getElementById('main-itinerary').style.display = 'block';
+        document.getElementById('fabCalc').style.display = 'flex'; // 顯示浮動計算機
+        window.scrollTo(0, 0);
+    }
     }
 
     /* 2. Tab 切換功能 */
@@ -570,6 +583,7 @@
 
 </body>
 </html>
+
 
 
 
