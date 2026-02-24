@@ -152,7 +152,53 @@
             75% { transform: translateX(-5px); }
             100% { transform: translateX(0); }
         }
-
+        
+        /* =========================================
+           全新計算機輸入框 (內置灰色 ,000)
+           ========================================= */
+        .currency-input-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 15px 0;
+            border: 2px solid var(--primary-light);
+            border-radius: 15px;
+            padding: 12px;
+            background: white;
+            transition: all 0.3s;
+        }
+        .currency-input-wrapper:focus-within {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(255, 142, 142, 0.2);
+        }
+        .currency-input-wrapper input {
+            border: none;
+            outline: none;
+            font-size: 1.6rem;
+            font-weight: 900;
+            text-align: right;
+            color: var(--text-color);
+            width: 50%;
+            background: transparent;
+            padding: 0;
+        }
+        .gray-zeros {
+            color: #ccc; /* 灰色字 */
+            font-size: 1.6rem;
+            font-weight: 900;
+            text-align: left;
+            width: 50%;
+            padding-left: 2px;
+            pointer-events: none; /* 防止篤錯 */
+        }
+        /* 隱藏輸入框自帶嘅上下箭嘴，畫面更乾淨 */
+        .currency-input-wrapper input::-webkit-outer-spin-button,
+        .currency-input-wrapper input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
     </style>
 <!-- 🎊 引入撒花特效 Library 🎊 -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -428,10 +474,11 @@
         <h3 style="color: var(--primary-color); margin-bottom: 5px;">🇻🇳 越南盾計算機</h3>
         <p style="font-size: 0.85rem; color: #777; margin-bottom: 20px;">唔使估估吓，入個銀碼即刻轉港幣！</p>
         
-        <input type="number" id="vnd-input" class="currency-input" placeholder="輸入越南盾 (VND.000)" oninput="convertCurrency()">
-        <div style="font-size: 1.8rem; margin: 5px 0; color: #bbb;">⬇️</div>
-        <div id="hkd-result" style="font-size: 2.2rem; font-weight: 900; color: #D81B60;">0 HKD</div>
-        <div class="exchange-rate">💡 參考匯率：1 HKD ≈ 3,300 VND</div>
+        <p style="font-size: 0.85rem; color: #777; margin-bottom: 20px;">當地多數唔講後面3個零<br>照打餐牌前面個數字就得！</p>
+        <div class="currency-input-wrapper">
+            <input type="number" id="vnd-input" placeholder="0" oninput="convertCurrency()">
+            <span class="gray-zeros">,000</span>
+        </div>
     </div>
 </div>
 
@@ -583,6 +630,7 @@
 
 </body>
 </html>
+
 
 
 
