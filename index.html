@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kevin & Belle👑 專屬：富國島之旅 🌴</title>
     
 <!-- =========================================
          iPhone "加入主畫面" 專屬 App 設定
@@ -15,10 +19,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kevin & Belle👑 專屬：富國島之旅 🌴</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -479,6 +479,11 @@
             <input type="number" id="vnd-input" placeholder="0" oninput="convertCurrency()">
             <span class="gray-zeros">,000</span>
         </div>
+
+                <!-- 【修復】加返呢三行顯示結果嘅 HTML！ -->
+        <div style="font-size: 1.8rem; margin: 5px 0; color: #bbb;">⬇️</div>
+        <div id="hkd-result" style="font-size: 2.2rem; font-weight: 900; color: #D81B60;">0 HKD</div>
+        <div class="exchange-rate">💡 計算方法：輸入數字 ÷ 3.3</div>
     </div>
 </div>
 
@@ -547,7 +552,7 @@
             setTimeout(() => input.style.animation = '', 400);
         }
         // 解鎖後執行的特效及畫面切換
-    function triggerUnlock() {
+        function triggerUnlock() {
         // 🎊 撒花特效 🎊 (配色設定為主題色粉紅、藍、橙)
         if (typeof confetti === 'function') {
             confetti({
@@ -630,6 +635,7 @@
 
 </body>
 </html>
+
 
 
 
