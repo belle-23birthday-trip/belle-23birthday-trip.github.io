@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kevin & Belle👑 專屬：富國島之旅 🌴</title>
-    
-<!-- =========================================
+    <!-- =========================================
          iPhone "加入主畫面" 專屬 App 設定
          ========================================= -->
     <!-- 1. 設定 iPhone 主畫面個 App Icon -->
@@ -18,6 +14,10 @@
     <!-- 3. 終極偽裝術：令網頁好似 App 咁全螢幕運作 (隱藏 Safari 上下 Bar) -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kevin & Belle👑 專屬：富國島之旅 🌴</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -476,7 +476,7 @@
         
         <p style="font-size: 0.85rem; color: #777; margin-bottom: 20px;">當地多數唔講後面3個零<br>照打餐牌前面個數字就得！</p>
         <div class="currency-input-wrapper">
-            <input type="number" id="vnd-input" placeholder="0" oninput="convertCurrency()">
+            <input type="tel" id="vnd-input" placeholder="0" inputmode="numeric" pattern="[0-9]*" oninput="convertCurrency()">
             <span class="gray-zeros">,000</span>
         </div>
 
@@ -635,6 +635,7 @@
 
 </body>
 </html>
+
 
 
 
