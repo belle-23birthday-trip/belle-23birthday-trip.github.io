@@ -631,10 +631,44 @@
         }
     });
     function closeEggModal() { document.getElementById('easter-egg-modal').style.display = 'none'; }
+    
+    /* =========================================
+       6. 向右滑動返回首頁功能 (Swipe Right to Go Back)
+       ========================================= */
+    let touchstartX = 0;
+    let touchstartY = 0;
+
+    const itineraryContainer = document.getElementById('main-itinerary');
+
+    // 記錄手指撳落去嘅座標
+    itineraryContainer.addEventListener('touchstart', function(event) {
+        touchstartX = event.changedTouches[0].screenX;
+        touchstartY = event.changedTouches[0].screenY;
+    }, {passive: true});
+
+    // 記錄手指離開嘅座標並計算滑動方向
+    itineraryContainer.addEventListener('touchend', function(event) {
+        const touchendX = event.changedTouches[0].screenX;
+        const touchendY = event.changedTouches[0].screenY;
+        
+        const diffX = touchendX - touchstartX;
+        const diffY = touchendY - touchstartY;
+
+        // 判斷向右滑動：X軸移動大於 80px，且水平位移大於垂直位移 (避免上下掃嗰陣誤觸)
+        if (diffX > 80 && Math.abs(diffX) > Math.abs(diffY)) {
+            // 隱藏行程頁同浮動計算機
+            document.getElementById('main-itinerary').style.display = 'none';
+            document.getElementById('fabCalc').style.display = 'none';
+            // 顯示返首頁 (注意首頁係用 flex 排版)
+            document.getElementById('landing-page').style.display = 'flex';
+        }
+    }, {passive: true});
+
 </script>
 
 </body>
 </html>
+
 
 
 
