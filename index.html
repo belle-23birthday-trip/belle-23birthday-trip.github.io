@@ -50,8 +50,8 @@
             overflow: hidden;
         }
 
-        .calc-btn { position: absolute; top: 25px; right: 25px; background: white; border: 2px solid var(--primary-light); font-size: 1.6rem; border-radius: 50%; width: 55px; height: 55px; box-shadow: 0 4px 15px rgba(255, 142, 142, 0.3); cursor: pointer; z-index: 20; transition: transform 0.2s, box-shadow 0.2s; display: flex; justify-content: center; align-items: center; }
-        .calc-btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(255, 142, 142, 0.5); }
+        .calc-btn { position: fixed; bottom: 25px; right: 25px; background: var(--primary-color); color: white; border: none; font-size: 1.5rem; border-radius: 50%; width: 55px; height: 55px; box-shadow: 0 4px 15px rgba(255, 142, 142, 0.5); cursor: pointer; z-index: 100; transition: transform 0.2s; display: flex; justify-content: center; align-items: center; }
+        .calc-btn:hover { transform: scale(1.1); }
         .calc-btn:active { transform: scale(0.95); }
 
         .landing-title { font-size: 2rem; color: var(--primary-color); font-weight: 900; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(255, 142, 142, 0.2); }
@@ -635,6 +635,7 @@
 
 </body>
 </html>
+
 
 
 
