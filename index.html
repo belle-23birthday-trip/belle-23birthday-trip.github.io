@@ -8,14 +8,9 @@
     <!-- =========================================
          iPhone "加入主畫面" 專屬 App 設定
          ========================================= -->
-    <!-- 1. 設定 iPhone 主畫面個 App Icon -->
     <link rel="apple-touch-icon" href="icon.png">
     <link rel="icon" type="image/png" href="icon.png">
-    
-    <!-- 2. 設定 Add to Home Screen 時預設的 App 名稱 (建議簡短) -->
     <meta name="apple-mobile-web-app-title" content="富國島🎂之旅">
-    
-    <!-- 3. 終極偽裝術：令網頁好似 App 咁全螢幕運作 (隱藏 Safari 上下 Bar) -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
@@ -57,7 +52,11 @@
 
         .landing-title { font-size: 2rem; color: #FF4D94; font-weight: 900; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(255, 142, 142, 0.2); }
         .couple-name { font-size: 1.8rem; color: #D81B60; font-weight: bold; margin: 15px 0; letter-spacing: 2px; }
-        .travel-dates { font-size: 1.1rem; color: #666; font-weight: 500; margin-bottom: 30px; background: rgba(255, 245, 255, 0.8); padding: 5px 15px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        
+        /* ✨ 點擊打開行李清單的按鈕樣式 ✨ */
+        .travel-dates { font-size: 1.1rem; color: #666; font-weight: 500; margin-bottom: 30px; background: rgba(255, 245, 255, 0.8); padding: 8px 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(255, 142, 142, 0.2); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 2px solid transparent; }
+        .travel-dates:hover { transform: scale(1.05); border-color: var(--primary-light); box-shadow: 0 6px 20px rgba(255, 142, 142, 0.4); }
+        .travel-dates-hint { display: block; font-size: 0.8rem; color: var(--primary-color); margin-top: 3px; font-weight: bold; }
         
         /* 倒數計時器 */
         .countdown-container { background: rgba(255, 245, 255, 0.8); width: 100%; max-width: 350px; border-radius: 20px; padding: 20px 15px; box-shadow: 0 8px 25px rgba(255, 142, 142, 0.2); backdrop-filter: blur(5px); border: 2px solid white; margin-bottom: 40px; z-index: 10; }
@@ -115,7 +114,7 @@
         .info-box li { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; color: #555; }
         
         /* 浮動計算機按鈕 (主行程用) */
-        .fab-calc { position: fixed; bottom: 25px; right: 25px;  rgba(255, 245, 255, 0.8); color: var(--primary-color); border: none; font-size: 1.5rem; border-radius: 50%; width: 55px; height: 55px; box-shadow: 0 4px 15px rgba(255, 142, 142, 0.5); cursor: pointer; z-index: 100; transition: transform 0.2s, box-shadow 0.2s; display: none; justify-content: center; align-items: center; }
+        .fab-calc { position: fixed; bottom: 25px; right: 25px; background: rgba(255, 245, 255, 0.8); color: var(--primary-color); border: none; font-size: 1.5rem; border-radius: 50%; width: 55px; height: 55px; box-shadow: 0 4px 15px rgba(255, 142, 142, 0.5); cursor: pointer; z-index: 100; transition: transform 0.2s, box-shadow 0.2s; display: none; justify-content: center; align-items: center; }
         .fab-calc:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(255, 142, 142, 0.7); }
         .fab-calc:active { transform: scale(0.95); }
 
@@ -124,7 +123,7 @@
 
         footer { text-align: center; font-size: 0.85rem; color: #aaa; margin-top: 30px; padding-bottom: 30px; }
         
-        /* 隱藏彩蛋心心特效 (加入 touch-action 防止手機連點放大) */
+        /* 隱藏彩蛋心心特效 */
         #secret-heart { cursor: pointer; display: inline-block; transition: transform 0.2s; user-select: none; touch-action: manipulation; }
 
         /* =========================================
@@ -149,54 +148,32 @@
             100% { transform: translateX(0); }
         }
         
+        /* 越南盾計算機輸入框 */
+        .currency-input-wrapper { display: flex; align-items: center; justify-content: center; width: 100%; margin: 15px 0; border: 2px solid var(--primary-light); border-radius: 15px; padding: 12px; background: white; transition: all 0.3s; }
+        .currency-input-wrapper:focus-within { border-color: var(--primary-color); box-shadow: 0 0 10px rgba(255, 142, 142, 0.2); }
+        .currency-input-wrapper input { border: none; outline: none; font-size: 1.6rem; font-weight: 900; text-align: right; background: linear-gradient(45deg, #FF6B6B, var(--primary-color), #D81B60); -webkit-background-clip: text; background-clip: text; color: transparent; width: 50%; padding: 0; }
+        .gray-zeros { color: #ccc; font-size: 1.6rem; font-weight: 900; text-align: left; width: 50%; padding-left: 2px; pointer-events: none; }
+        .currency-input-wrapper input::-webkit-outer-spin-button, .currency-input-wrapper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
         /* =========================================
-           全新計算機輸入框 (內置灰色 ,000)
+           ✨ 新增：老婆專屬行李清單樣式 ✨
            ========================================= */
-        .currency-input-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin: 15px 0;
-            border: 2px solid var(--primary-light);
-            border-radius: 15px;
-            padding: 12px;
-            background: white;
-            transition: all 0.3s;
-        }
-        .currency-input-wrapper:focus-within {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(255, 142, 142, 0.2);
-        }
-        .currency-input-wrapper input {
-            border: none;
-            outline: none;
-            font-size: 1.6rem;
-            font-weight: 900;
-            text-align: right;
-            /* 漸變色搬咗嚟呢度 👇 */
-            background: linear-gradient(45deg, #FF6B6B, var(--primary-color), #D81B60);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            width: 50%;
-            padding: 0;
-        }
-        .gray-zeros {
-            color: #ccc; /* 灰色字 */
-            font-size: 1.6rem;
-            font-weight: 900;
-            text-align: left;
-            width: 50%;
-            padding-left: 2px;
-            pointer-events: none; /* 防止篤錯 */
-        }
-        /* 隱藏輸入框自帶嘅上下箭嘴，畫面更乾淨 */
-        .currency-input-wrapper input::-webkit-outer-spin-button,
-        .currency-input-wrapper input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+        .checklist-container { text-align: left; margin-top: 15px; max-height: 55vh; overflow-y: auto; padding-right: 5px; }
+        .checklist-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--primary-light); cursor: pointer; user-select: none; }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item input[type="checkbox"] { display: none; }
+        .custom-checkbox { width: 22px; height: 22px; border: 2px solid #ddd; border-radius: 6px; margin-right: 12px; display: inline-flex; justify-content: center; align-items: center; transition: all 0.2s; flex-shrink: 0; }
+        
+        /* Checkbox 剔咗之後嘅狀態 */
+        .checklist-item input[type="checkbox"]:checked + .custom-checkbox { background: var(--primary-color); border-color: var(--primary-color); }
+        .checklist-item input[type="checkbox"]:checked + .custom-checkbox::after { content: '✓'; color: white; font-weight: bold; font-size: 14px; }
+        
+        /* 文字剔咗之後嘅狀態 (刪除線 + 變灰) */
+        .checklist-text { font-size: 0.95rem; color: #444; transition: all 0.2s; font-weight: 500; }
+        .checklist-item input[type="checkbox"]:checked ~ .checklist-text { color: #bbb; text-decoration: line-through; }
+        
+        /* 老公仔預先準備好嘅 Label */
+        .pre-ticked { font-size: 0.7rem; background: #FFF0F5; color: #D81B60; padding: 3px 8px; border-radius: 12px; margin-left: 8px; font-weight: bold; vertical-align: middle; border: 1px solid #FFD6D6; display: inline-block; white-space: nowrap;}
     </style>
     <!-- 🎊 引入撒花特效 Library 🎊 -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -215,7 +192,12 @@
 
     <h1 class="landing-title">🎂 富國島生日之旅 🎂</h1>
     <div class="couple-name">Kevin ❤️ Belle</div>
-    <div class="travel-dates">✈️ Feb 28 - Mar 03, 2026</div>
+    
+    <!-- ✨ 行李清單觸發按鈕 ✨ -->
+    <div class="travel-dates" onclick="openChecklistModal()">
+        ✈️ Feb 28 - Mar 03, 2026
+        <span class="travel-dates-hint">👆出發前準備 📝</span>
+    </div>
 
     <div class="countdown-container">
         <div class="countdown-title">✨ 距離我們出發仲有 ✨</div>
@@ -443,8 +425,109 @@
     <footer>
         <p>Created with <span id="secret-heart">❤️</span> for 老婆喵</p>
         <p>Phu Quoc Birthday Trip 2026</p>
-        <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.5;">(Try clicking the heart 3 times... 😉)</p>
+        <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.5;">(Try clicking the heart 3 or 5 times... 😉)</p>
     </footer>
+</div>
+
+<!-- =========================================
+     [新增] 行李清單 Modal 📝
+     ========================================= -->
+<div id="checklist-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeChecklistModal()">✖</button>
+        <h3 style="color: var(--primary-color); margin-bottom: 5px; font-size: 1.4rem;">🎒 老婆專屬行李清單</h3>
+        <p style="font-size: 0.85rem; color: #777; margin-bottom: 5px;">4日3夜富國島之旅準備！</p>
+        <p style="font-size: 0.8rem; color: #D81B60; font-weight: bold; margin-bottom: 15px;">(有 <span class="pre-ticked" style="margin:0;">Kevin 準備</span> 嗰啲唔使理啦！)</p>
+        
+        <div class="checklist-container">
+            <!-- 老公準備系列 (預設剔好 + 禁改) -->
+            <label class="checklist-item">
+                <input type="checkbox" checked onclick="return false;">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">「老公仔」呢個最重要裝備 ❤️<span class="pre-ticked">一定要帶！</span></span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox" checked onclick="return false;">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">越南上網卡 📶<span class="pre-ticked">老公準備</span></span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox" checked onclick="return false;">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">充電線/ Type c 線 🔌<span class="pre-ticked">老公準備</span></span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox" checked onclick="return false;">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">尿袋 🔋<span class="pre-ticked">老公準備</span></span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox" checked onclick="return false;">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">越南盾 💵<span class="pre-ticked">老公準備</span></span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox" checked onclick="return false;">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">蚊怕水 🦟<span class="pre-ticked">老公準備</span></span>
+            </label>
+            
+            <hr style="border: 0; border-top: 2px dashed #FFD6D6; margin: 15px 0;">
+            <p style="font-size: 0.9rem; color: var(--primary-color); font-weight: bold; margin-bottom: 10px;">👇 老婆喵要自己帶嘅 👇</p>
+            
+            <!-- 老婆自己執系列 (俾佢慢慢剔) -->
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">證件護照 🛂</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">靚靚泳衣 👙</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">日常護膚品 & 化妝品 💄</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">太陽眼鏡/ 帽 🕶️👒</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">靚靚衫衫 (4-5套) 👗</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">靚靚內衣褲 🩲</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">直髮夾 / 捲髮棒 💁‍♀️</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">舒服行街鞋 & 沙灘拖鞋 👡</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">夜晚瞓覺靚靚睡衣 🌙</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox">
+                <span class="custom-checkbox"></span>
+                <span class="checklist-text">藥包 💊</span>
+            </label>
+        </div>
+    </div>
 </div>
 
 <!-- =========================================
@@ -486,7 +569,7 @@
 </div>
 
 <!-- =========================================
-     隱藏彩蛋 Modal 🎉
+     隱藏彩蛋 Modal 1 (連撳 3 下) 🎉
      ========================================= -->
 <div id="easter-egg-modal" class="modal-overlay">
     <div class="modal-content" style="background: linear-gradient(135deg, #FFF0F5, #FFE4E1); border: 3px solid var(--primary-color);">
@@ -520,14 +603,13 @@
      ========================================= -->
 <script>
     /* 🌟 設定出發目標時間 (全域變數) */
-    // 💡 提提你：如果想測試自動解鎖，可以將下面時間改為 1 分鐘後！
     const countDownDate = new Date("Feb 28, 2026 07:00:00").getTime();
 
     /* =========================================
-       解鎖後執行的特效及畫面切換 (搬咗出嚟呢度！)
+       解鎖後執行的特效及畫面切換
        ========================================= */
     function triggerUnlock() {
-        // 🎊 撒花特效 🎊 (配色設定為主題色粉紅、藍、橙)
+        // 🎊 撒花特效 🎊
         if (typeof confetti === 'function') {
             confetti({
                 particleCount: 150,
@@ -539,32 +621,25 @@
         // 切換頁面
         document.getElementById('landing-page').style.display = 'none';
         document.getElementById('main-itinerary').style.display = 'block';
-        document.getElementById('fabCalc').style.display = 'flex'; // 顯示浮動計算機
+        document.getElementById('fabCalc').style.display = 'flex'; 
         window.scrollTo(0, 0);
     }
 
     /* 1. 密碼鎖功能 */
     function openPasswordModal() {
         const now = new Date().getTime();
-        
-        // 如果已經夠鐘出發，直接自動解鎖，唔使再入密碼！
         if (now >= countDownDate) {
             triggerUnlock();
             return;
         }
-
         document.getElementById('password-modal').style.display = 'flex';
         document.getElementById('pwd-input').value = '';
         document.getElementById('pwd-error').style.display = 'none';
-        // Auto focus for convenience
         setTimeout(() => document.getElementById('pwd-input').focus(), 100);
     }
 
-    // 加入 Enter 鍵觸發解鎖功能
     document.getElementById('pwd-input').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            checkPassword();
-        }
+        if (e.key === 'Enter') checkPassword();
     });
 
     function closePasswordModal() {
@@ -578,10 +653,8 @@
         
         if (pwd === 'ILOVEYOU') {
             closePasswordModal();
-            // 密碼正確，隱藏首頁，顯示行程
             triggerUnlock();
         } else {
-            // 密碼錯誤，震動效果加錯誤提示
             errorMsg.style.display = 'block';
             input.style.animation = 'shake 0.4s';
             setTimeout(() => input.style.animation = '', 400);
@@ -604,7 +677,7 @@
         if (distance < 0) {
             clearInterval(x);
             document.getElementById("countdown").innerHTML = "<h2 style='color:#D81B60;'>🎉 我哋出發啦！✈️</h2>";
-            document.querySelector('.start-btn').innerText = '行程解鎖 🔓'; // 夠鐘自動變字
+            document.querySelector('.start-btn').innerText = '行程解鎖 🔓'; 
             return;
         }
         
@@ -614,7 +687,7 @@
         document.getElementById("secs").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
     }, 1000);
 
-    /* 4. 越南盾計算機功能 */
+    /* 4. 越南盾計算機功能 (已修復千位數逗號邏輯) */
     function openCalcModal() { document.getElementById('calc-modal').style.display = 'flex'; }
     function closeCalcModal() { document.getElementById('calc-modal').style.display = 'none'; }
     function convertCurrency() {
@@ -635,27 +708,29 @@
         }
     }
 
+    /* ✨ 新增：行李清單打開/關閉功能 ✨ */
+    function openChecklistModal() { document.getElementById('checklist-modal').style.display = 'flex'; }
+    function closeChecklistModal() { document.getElementById('checklist-modal').style.display = 'none'; }
+
    /* 5. 隱藏彩蛋功能 (連撳 3 下 或 5 下心心) */
     let heartClicks = 0;
     let heartTimer;
     document.getElementById('secret-heart').addEventListener('click', function(e) {
-        e.preventDefault(); // 防止手機預設行為
+        e.preventDefault(); 
         heartClicks++;
         
-        // 放大縮細特效
         this.style.transform = `scale(${1 + heartClicks * 0.2})`;
         setTimeout(() => this.style.transform = 'scale(1)', 150);
         
         clearTimeout(heartTimer);
         
-        // 俾 0.4 秒時間等用家撳完，先結算總共撳咗幾多下
         heartTimer = setTimeout(() => {
             if (heartClicks >= 5) {
                 document.getElementById('easter-egg-modal-2').style.display = 'flex';
             } else if (heartClicks >= 3) {
                 document.getElementById('easter-egg-modal').style.display = 'flex';
             }
-            heartClicks = 0; // 重置
+            heartClicks = 0; 
         }, 400);
     });
     function closeEggModal() { document.getElementById('easter-egg-modal').style.display = 'none'; }
@@ -669,13 +744,11 @@
 
     const itineraryContainer = document.getElementById('main-itinerary');
 
-    // 記錄手指撳落去嘅座標
     itineraryContainer.addEventListener('touchstart', function(event) {
         touchstartX = event.changedTouches[0].screenX;
         touchstartY = event.changedTouches[0].screenY;
     }, {passive: true});
 
-    // 記錄手指離開嘅座標並計算滑動方向
     itineraryContainer.addEventListener('touchend', function(event) {
         const touchendX = event.changedTouches[0].screenX;
         const touchendY = event.changedTouches[0].screenY;
@@ -683,12 +756,9 @@
         const diffX = touchendX - touchstartX;
         const diffY = touchendY - touchstartY;
 
-        // 判斷向右滑動：X軸移動大於 80px，且水平位移大於垂直位移 (避免上下掃嗰陣誤觸)
         if (diffX > 80 && Math.abs(diffX) > Math.abs(diffY)) {
-            // 隱藏行程頁同浮動計算機
             document.getElementById('main-itinerary').style.display = 'none';
             document.getElementById('fabCalc').style.display = 'none';
-            // 顯示返首頁 (注意首頁係用 flex 排版)
             document.getElementById('landing-page').style.display = 'flex';
         }
     }, {passive: true});
@@ -697,9 +767,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
