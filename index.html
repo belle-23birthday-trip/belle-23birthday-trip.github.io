@@ -54,7 +54,19 @@
         .calc-btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(255, 142, 142, 0.7); }
         .calc-btn:active { transform: scale(0.95); }
 
-        .landing-title { font-size: 2rem; color: var(--primary-color); color: #FF4D94; font-weight: 900; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(255, 142, 142, 0.2); }
+        .landing-title { 
+            font-size: 2.2rem; 
+            font-weight: 900; 
+            margin-bottom: 5px; 
+            /* 漸變字體效果 */
+            background: linear-gradient(45deg, #FF6B6B, var(--primary-color), #D81B60);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* 輕微發光效果取代死板陰影 */
+            text-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            letter-spacing: 1px;
+        }
         .couple-name { font-size: 1.8rem; color: #D81B60; font-weight: bold; margin: 15px 0; letter-spacing: 2px; }
         .travel-dates { font-size: 1.1rem; color: #666; font-weight: 500; margin-bottom: 30px; background: rgba(255, 245, 255, 0.8); padding: 5px 15px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         
@@ -470,7 +482,7 @@
         
         <p style="font-size: 0.85rem; color: #777; margin-bottom: 20px;">當地多數唔講後面3個零<br>照打餐牌前面個數字就得！</p>
         <div class="currency-input-wrapper">
-            <input type="tel" id="vnd-input" placeholder="0" inputmode="numeric" pattern="[0-9]*" oninput="convertCurrency()">
+            <input type="text" id="vnd-input" placeholder="0" inputmode="numeric" pattern="[0-9,]*" oninput="convertCurrency()">
             <span class="gray-zeros"> ,000 VND</span>
         </div>
 
@@ -614,11 +626,19 @@
     function openCalcModal() { document.getElementById('calc-modal').style.display = 'flex'; }
     function closeCalcModal() { document.getElementById('calc-modal').style.display = 'none'; }
     function convertCurrency() {
-        const vnd = document.getElementById('vnd-input').value;
-        if (vnd) {
-            const hkd = (vnd / 3.3).toFixed(1); 
+        const inputEl = document.getElementById('vnd-input');
+        // 1. 自動洗走所有非數字字元 (包括逗號)，拎返個純數字出嚟
+        let rawValue = inputEl.value.replace(/\D/g, ''); 
+        
+        if (rawValue) {
+            // 2. 幫輸入框個數字自動加返千位數逗號 (例如 1000 -> 1,000)
+            inputEl.value = Number(rawValue).toLocaleString('en-US');
+            
+            // 3. 照舊用純數字嚟計港幣
+            const hkd = (rawValue / 3.3).toFixed(1); 
             document.getElementById('hkd-result').innerText = hkd + ' HKD';
         } else {
+            inputEl.value = '';
             document.getElementById('hkd-result').innerText = '0 HKD';
         }
     }
@@ -685,6 +705,7 @@
 
 </body>
 </html>
+
 
 
 
