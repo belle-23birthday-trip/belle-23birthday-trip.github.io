@@ -497,6 +497,21 @@
 </div>
 
 <!-- =========================================
+     隱藏彩蛋 Modal 2 (連撳 5 下) 🎉
+     ========================================= -->
+<div id="easter-egg-modal-2" class="modal-overlay">
+    <div class="modal-content" style="background: linear-gradient(135deg, #FFF0F5, #FFE4E1); border: 3px solid var(--secondary-color);">
+        <button class="close-modal" onclick="closeEggModal2()">✖</button>
+        <h2 style="color: var(--secondary-color); margin-bottom: 15px; font-weight: 900;">🎊 終極 Surprise! 🎊</h2>
+        <!-- 💡換另一張相嘅 Link 或檔名 -->
+        <img src="IMG_9999.JPG" alt="Love" style="width:100%; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <p style="font-size: 1.2rem; font-weight: bold; color: var(--secondary-color);">連撳 5 下都俾你發現到！😲</p>
+        <p style="font-size: 0.95rem; color: #555; margin-top: 10px; line-height: 1.5;">老婆喵真係聰明！呢個係老公仔收埋嘅第二個秘密地點！第5個同老婆一齊過既生日！今次旅行玩得開唔開心呀！應承老婆每年都要同老婆一齊開開心心咁一齊過生日❤️❤️好唔好！！！</p>
+        <p style="font-size: 0.9rem; color: var(--secondary-color); margin-top: 20px; font-weight: bold;">- 錫晒你嘅 Kevin -</p>
+    </div>
+</div>
+    
+<!-- =========================================
      JavaScript 邏輯功能
      ========================================= -->
 <script>
@@ -608,7 +623,7 @@
         }
     }
 
-    /* 5. 隱藏彩蛋功能 (連撳 3 下心心) */
+   /* 5. 隱藏彩蛋功能 (連撳 3 下 或 5 下心心) */
     let heartClicks = 0;
     let heartTimer;
     document.getElementById('secret-heart').addEventListener('click', function(e) {
@@ -621,15 +636,18 @@
         
         clearTimeout(heartTimer);
         
-        if (heartClicks >= 3) {
-            document.getElementById('easter-egg-modal').style.display = 'flex';
+        // 俾 0.4 秒時間等用家撳完，先結算總共撳咗幾多下
+        heartTimer = setTimeout(() => {
+            if (heartClicks >= 5) {
+                document.getElementById('easter-egg-modal-2').style.display = 'flex';
+            } else if (heartClicks >= 3) {
+                document.getElementById('easter-egg-modal').style.display = 'flex';
+            }
             heartClicks = 0; // 重置
-        } else {
-            // 如果 1 秒內無再撳，重置次數
-            heartTimer = setTimeout(() => { heartClicks = 0; }, 1000);
-        }
+        }, 400);
     });
     function closeEggModal() { document.getElementById('easter-egg-modal').style.display = 'none'; }
+    function closeEggModal2() { document.getElementById('easter-egg-modal-2').style.display = 'none'; }
     
     /* =========================================
        6. 向右滑動返回首頁功能 (Swipe Right to Go Back)
@@ -667,5 +685,6 @@
 
 </body>
 </html>
+
 
 
