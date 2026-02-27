@@ -593,7 +593,7 @@
         <!-- 💡換另一張相嘅 Link 或檔名 -->
         <img src="IMG_9999.JPG" alt="Love" style="width:100%; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         <p style="font-size: 1.2rem; font-weight: bold; color: var(--secondary-color);">連撳 5 下都俾你發現到！😲</p>
-        <p style="font-size: 0.95rem; color: #555; margin-top: 10px; line-height: 1.5;">老婆喵真係聰明！呢個係老公仔收埋嘅第二個秘密！已經係第5個同老婆一齊過既生日！今次旅行玩得開唔開心呀！應承老婆每年都要同老婆一齊開開心心咁一齊過生日❤️❤️好唔好！！！</p>
+        <p style="font-size: 0.95rem; color: #555; margin-top: 10px; line-height: 1.5;">老婆喵真係聰明！呢個係老公仔收埋嘅第二個秘密！已經係第5個同老婆一齊過既生日！今次旅行玩得開唔開心呀！應承老婆每年都要一齊開開心心咁一齊過生日❤️❤️</p>
         <p style="font-size: 0.9rem; color: var(--secondary-color); margin-top: 20px; font-weight: bold;">- 錫晒你嘅老公仔 -</p>
     </div>
 </div>
@@ -604,7 +604,9 @@
 <script>
     /* 🌟 設定出發目標時間 (全域變數) */
     const countDownDate = new Date("Feb 28, 2026 07:00:00").getTime();
-
+    /* 🌟 新增：設定旅行完結時間 (進入回憶模式) */
+    const tripEndDate = new Date("Mar 03, 2026 23:59:59").getTime();
+    
     /* =========================================
        解鎖後執行的特效及畫面切換
        ========================================= */
@@ -672,12 +674,31 @@
     /* 3. 倒數計時器功能 */
     const x = setInterval(function() {
         const now = new Date().getTime();
+
+        // ✨ 新增：回憶模式 (旅行完結後 - Mar 03 23:59 之後)
+        if (now > tripEndDate) {
+            clearInterval(x);
+            
+            const container = document.querySelector(".countdown-container");
+            // 換成浪漫留言 (稍微調細少少字體等佢更精緻)
+            container.innerHTML = "<h2 style='color: var(--primary-color); margin: 5px 0; font-size: 1.25rem; line-height: 1.6; font-weight: 900;'>富國島 2026<br>期待我地下一個旅程 ✨</h2>";
+            
+            // 👇 動態將個框縮細，等佢無咁大舊 👇
+            container.style.padding = "15px 20px";      // 縮細內圍空白位
+            container.style.maxWidth = "280px";         // 縮細總闊度
+            container.style.marginBottom = "25px";      // 拉近同下面「回味行程」掣嘅距離
+        
+            document.querySelector('.start-btn').innerText = '2026生日之旅🎀'; 
+            return;
+        }
+
         const distance = countDownDate - now;
         
         if (distance < 0) {
             clearInterval(x);
-            document.getElementById("countdown").innerHTML = "<h2 style='color:#D81B60;'>🎉 我哋出發啦！✈️</h2>";
-            document.querySelector('.start-btn').innerText = '行程解鎖 🔓'; 
+            // 同步優化：出發後連同「距離我們出發仲有」標題一齊換走
+            document.querySelector(".countdown-container").innerHTML = "<h2 style='color:#D81B60; margin: 15px 0;'>🎉 我哋出發啦！✈️</h2>";
+            document.querySelector('.start-btn').innerText = '旅程解鎖 🔓'; 
             return;
         }
         
@@ -767,5 +788,6 @@
 
 </body>
 </html>
+
 
 
